@@ -1,0 +1,38 @@
+{
+  "itemList": [{
+      "name": "Monitor",
+      "price": 240.79,
+      "img": "monitor.png",
+      "description": "A 24\" monitor for PC. Model: M3425.",
+      "descriptionShort": "24\" monitor."
+    },
+    {
+      "name": "Hard drive",
+      "price": 145.99,
+      "img": "hdd.png",
+      "description": "A 3TB Hard drive for PC. Model: H7345.",
+      "descriptionShort": "3TB Hard drive."
+    },
+    {
+      "name": "CPU",
+      "price": 309.49,
+      "img": "cpu.png",
+      "description": "A 3GHz Quad-core CPU for PC. Model: C8456.",
+      "descriptionShort": "3GHz Quad-core CPU."
+    },
+    {
+      "name": "Mouse",
+      "price": 29.15,
+      "img": "mouse.png",
+      "description": "A gaming mouse with 5 buttons. Model: M5636.",
+      "descriptionShort": "Gaming mouse with 5 buttons."
+    },
+    {
+      "name": "Keyboard",
+      "price": 34.00,
+      "img": "keyboard.png",
+      "description": "A wireless keyboard with media buttons. Model: K7535.",
+      "descriptionShort": "Wireless keyboard with media buttons."
+    }
+  ]
+}
