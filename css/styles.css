@@ -15,14 +15,45 @@
 
 .itemName {
   display: inline-block;
-  width: 70px;
+  width: 90px;
 }
 
 .spanDescription {
   margin-left: 25px;
 }
 
-.shopingCartImg {
+.spanCartItems, .spanCartSum {
+  font-weight: bold;
+}
+
+.viewButton {
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.viewButton:hover {
+  background-color: #eee;
+}
+.viewButton.active {
+  background-color: #f5f5f5;
+}
+
+.shopingBasketSpan {
+  float: right;
+  line-height: 75px;
+  margin-right: 20px;
+}
+
+.shoppingCartImg {
+  width: 50px;
+  height: 50px;
+  float: right;
+  vertical-align: middle;
+}
+
+.removeFromCartImg {
   width: 50px;
   height: 50px;
   float: right;
@@ -31,7 +62,7 @@
 
 ul {
   padding-left: 0;
-  padding-top: 10px;
+  padding-top: 0;
   padding-bottom: 5px;
 }
 
@@ -40,6 +71,9 @@ li {
   padding: 10px;
   background-color: #eee;
   margin: 0 10px 5px 10px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 2px;
 }
 
 li:hover {
@@ -47,6 +81,13 @@ li:hover {
 }
 
 .price {
+  float: right;
+  line-height: 50px;
+  width: 100px;
+  text-align: center;
+}
+
+.itemsLeft {
   float: right;
   line-height: 50px;
 }
