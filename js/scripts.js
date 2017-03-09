@@ -10,7 +10,6 @@ $(document).ready(function() {
         products.push(data.itemList[key]);
         $('ul').append('<li><img src="img/products/' + data.itemList[key].img + '" class="productImg"><span class="itemName">' + data.itemList[key].name + '</span><span class="spanDescription">' + data.itemList[key].description + '</span> Model: <span class="spanModel">' + data.itemList[key].model + '</span><img src="img/delete.png" class="removeFromCartImg"><img src="img/cart.png" class="shoppingCartImg"><span class="price">' + data.itemList[key].price + '€</span><span class="itemsLeft">' + data.itemList[key].itemsLeft + '</span></li>');
       });
-      searchArrayByModel(products, "Printer");
   });
 
   //If 'list' icon is clicked - get data from json file and display it in 'list' view
@@ -59,7 +58,6 @@ $(document).ready(function() {
 
   //Pushes passed object into 'cart' array and updates local storage
   function addToCart(obj) {
-    //******check if there are still items left in storage******
     cart.push(obj);
     localStorage.setItem("cart", JSON.stringify(cart));
   }
@@ -83,7 +81,6 @@ $(document).ready(function() {
         return index;
       }
     }
-    return index;
   }
 
   //Updates shopping cart
