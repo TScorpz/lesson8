@@ -1,26 +1,48 @@
 $(document).ready(function() {
   var products = [];
   var cart = JSON.parse(localStorage.getItem("cart"));
+  if(cart === null) {
+    cart = [];
+  }
   updateShoppingCart();
 
-  //Get data from json file and display it in 'details' view
+  //Get all data from JSON file and put it in "products" array and display it in 'details' view
   $.getJSON("products.json",
     function(data) {
       Object.keys(data.itemList).forEach(function(key, index) {
         products.push(data.itemList[key]);
-        $('ul').append('<li><img src="img/products/' + data.itemList[key].img + '" class="productImg"><span class="itemName">' + data.itemList[key].name + '</span><span class="spanDescription">' + data.itemList[key].description + '</span> Model: <span class="spanModel">' + data.itemList[key].model + '</span><img src="img/delete.png" class="removeFromCartImg"><img src="img/cart.png" class="shoppingCartImg"><span class="price">' + data.itemList[key].price + '€</span><span class="itemsLeft">' + data.itemList[key].itemsLeft + '</span></li>');
-      });
+        $('ul').append('<li><img src="img/products/'
+                + data.itemList[key].img
+                + '" class="productImg"><span class="itemName">'
+                + data.itemList[key].name
+                + '</span><span class="spanDescription">'
+                + data.itemList[key].description
+                + '</span> Model: <span class="spanModel">'
+                + data.itemList[key].model
+                + '</span><div class="imgFrame"><img src="img/delete.png" class="removeFromCartImg"></div><div class="imgFrame"><img src="img/cart.png" class="shoppingCartImg"></div><span class="price">'
+                + data.itemList[key].price
+                + '€</span><span class="itemsLeft">'
+                + data.itemList[key].itemsLeft
+                + '</span></li>');
+    });
   });
 
   //If 'list' icon is clicked - get data from json file and display it in 'list' view
   $(".viewButton.list").on('click', function() {
     $("ul").empty();
-    $.getJSON("products.json",
-      function(data) {
-        Object.keys(data.itemList).forEach(function(key, index) {
-          $('ul').append('<li><span class="itemName">' + data.itemList[key].name + '</span><span class="spanDescriptionShort">' + data.itemList[key].descriptionShort + '</span> Model: <span class="spanModel">' + data.itemList[key].model + '</span><img src="img/delete.png" class="removeFromCartImg"><img src="img/cart.png" class="shoppingCartImg"><span class="price">' + data.itemList[key].price + '€</span><span class="itemsLeft">' + data.itemList[key].itemsLeft + '</span></li>');
-        });
-    });
+    for(var i = 0, len = products.length; i < len; i++) {
+      $('ul').append('<li><span class="itemName">'
+              + products[i].name
+              + '</span><span class="spanDescriptionShort">'
+              + products[i].descriptionShort
+              + '</span> Model: <span class="spanModel">'
+              + products[i].model
+              + '</span><div class="imgFrame"><img src="img/delete.png" class="removeFromCartImg"></div><div class="imgFrame"><img src="img/cart.png" class="shoppingCartImg"></div><span class="price">'
+              + products[i].price
+              + '€</span><span class="itemsLeft">'
+              + products[i].itemsLeft
+              + '</span></li>');
+    }
     $(".viewButton.active").removeClass("active");
     $(this).addClass("active");
   });
@@ -28,32 +50,51 @@ $(document).ready(function() {
   //If 'details' icon is clicked - get data from json file and display it in 'details' view
   $(".viewButton.details").on('click', function(){
     $("ul").empty();
-    $.getJSON("products.json",
-      function(data) {
-        Object.keys(data.itemList).forEach(function(key, index) {
-          $('ul').append('<li><img src="img/products/' + data.itemList[key].img + '" class="productImg"><span class="itemName">' + data.itemList[key].name + '</span><span class="spanDescription">' + data.itemList[key].description + '</span> Model: <span class="spanModel">' + data.itemList[key].model + '</span><img src="img/delete.png" class="removeFromCartImg"><img src="img/cart.png" class="shoppingCartImg"><span class="price">' + data.itemList[key].price + '€</span><span class="itemsLeft">' + data.itemList[key].itemsLeft + '</span></li>');
-        });
-    });
+    for(var i = 0, len = products.length; i < len; i++) {
+      $('ul').append('<li><img src="img/products/'
+              + products[i].img
+              + '" class="productImg"><span class="itemName">'
+              + products[i].name
+              + '</span><span class="spanDescription">'
+              + products[i].description
+              + '</span> Model: <span class="spanModel">'
+              + products[i].model
+              + '</span><div class="imgFrame"><img src="img/delete.png" class="removeFromCartImg"></div><div class="imgFrame"><img src="img/cart.png" class="shoppingCartImg"></div><span class="price">'
+              + products[i].price
+              + '€</span><span class="itemsLeft">'
+              + products[i].itemsLeft
+              + '</span></li>');
+    }
     $(".viewButton.active").removeClass("active");
     $(this).addClass("active");
   });
 
   //If clicked on shopping cart icon
-  $("div").on('click', '.shoppingCartImg', function() {
-    var model = $(this).parent().find(".spanModel").html();
+  $(document).on('click', '.shoppingCartImg', function() {
+    var model = $(this).parent().parent().find(".spanModel").html();
     var itemIndex = searchArrayByModel(products, model);
     if(products[itemIndex].itemsLeft > 0) {
       addToCart(products[itemIndex]);
-      $(this).parent().find('.itemsLeft').html(--(products[itemIndex].itemsLeft));
+      $(this).parent().parent().find('.itemsLeft').html(--(products[itemIndex].itemsLeft));
       updateShoppingCart();
     }
   });
 
   //If clicked on remove from cart icon
-  $("div").on('click', '.removeFromCartImg', function() {
-    var model = $(this).parent().find(".spanModel").html();
-    removeFromCart(model);
-    updateShoppingCart();
+  $(document).on('click', '.removeFromCartImg', function() {
+    $(".modalDeleteConfirm").show();
+    var model = $(this).parent().parent().find(".spanModel").html();
+    //If clicked on confirm remove from cart button
+    $(".confirmDeleteBtn").on('click', function() {
+      removeFromCart(model);
+      updateShoppingCart();
+      $(".modalDeleteConfirm").hide();
+    });
+
+    //If clicked on cancel remove from cart button
+    $(".cancelDeleteBtn").on('click', function() {
+      $(".modalDeleteConfirm").hide();
+    });
   });
 
   //Pushes passed object into 'cart' array and updates local storage

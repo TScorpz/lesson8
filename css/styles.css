@@ -10,16 +10,16 @@
   height: 50px;
   vertical-align: middle;
   margin-left: 15px;
-  margin-right: 40px;
+  margin-right: 20px;
 }
 
 .itemName {
   display: inline-block;
-  width: 90px;
+  width: 80px;
 }
 
 .spanDescription {
-  margin-left: 25px;
+  margin-left: 10px;
 }
 
 .spanCartItems, .spanCartSum {
@@ -46,17 +46,20 @@
   margin-right: 20px;
 }
 
+.imgFrame {
+    height: 30px;
+    width: 30px;
+    float: right;
+    margin-right: 5px;
+}
+
 .shoppingCartImg {
-  width: 50px;
-  height: 50px;
-  float: right;
+  max-width: 100%;
   vertical-align: middle;
 }
 
 .removeFromCartImg {
-  width: 50px;
-  height: 50px;
-  float: right;
+  max-width: 100%;
   vertical-align: middle;
 }
 
@@ -83,11 +86,48 @@ li:hover {
 .price {
   float: right;
   line-height: 50px;
-  width: 100px;
+  width: 80px;
   text-align: center;
 }
 
 .itemsLeft {
   float: right;
   line-height: 50px;
+}
+
+.modalDeleteConfirm {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left:0;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+}
+
+.modalBox {
+  width: 400px;
+  margin: 10% auto;
+  background-color: #777;
+
+}
+
+.modalBox p {
+  padding: 20px;
+  margin-bottom: 0;
+}
+
+.modalBox input {
+  float: right;
+}
+
+.modalBox .modalTitle {
+  margin-top: 0px;
+  background-color: #999;
+  padding: 20px;
+}
+
+.cancelDeleteBtn, .confirmDeleteBtn {
+  margin: 0 15px 15px 0;
 }
